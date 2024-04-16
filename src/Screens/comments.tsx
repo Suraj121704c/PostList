@@ -24,9 +24,13 @@ import Screens from '../Utils/Screens';
 
 const Comments = () => {
   const navigation = useNavigation<any>();
-  const [Comments, SetComments] = useState<any>([]);
+  const [Comments, SetComments] = useState<any>([
+    {
+      id : 1 , 
+      commentValue : "In commodo eu nulla duis adipisicing proident Lorem qui incididunt"
+    }
+  ]);
   const [commentValue, setCommentValue] = useState('');
-  const [showComment, setShowComment] = useState(false);
   const InputRef = useRef<any>();
 
   const item = {
@@ -190,16 +194,22 @@ const Comments = () => {
 
           {Comments.map((c: any) => (
             <View style={styles.showComment_container} key={c.id}>
-              <Text style={{color: '#000'}}>{c.commentValue}</Text>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Image
+                  source={Images.IMG.ADMIN}
+                  style={{height: hp(3), width: wp(6)}}
+                />
+                <Text style={{fontSize: hp(2) , marginLeft : wp(2) , color : "blue"}}>xyz@gmail.com</Text>
+              </View>
+              <Text style={{color: '#000', marginTop: hp(1)}}>
+                {c.commentValue}
+              </Text>
               <View
                 style={{
                   flexDirection: 'row',
-                  justifyContent: 'space-between',
+                  justifyContent: 'flex-end',
                   marginTop: hp(2),
                 }}>
-                <TouchableOpacity>
-                  <Text style={{color: 'blue'}}>Comment</Text>
-                </TouchableOpacity>
                 <TouchableOpacity>
                   <Text style={{color: '#a55233'}}>Reply</Text>
                 </TouchableOpacity>
@@ -240,7 +250,7 @@ const styles = StyleSheet.create({
   showComment_container: {
     width: wp(80),
     minHeight: hp(6),
-    backgroundColor: 'lightgray',
+    backgroundColor: '#f2f2f2',
     marginTop: hp(1),
     padding: wp(3),
     borderRadius: wp(3),

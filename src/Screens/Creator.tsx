@@ -18,25 +18,6 @@ import Heading from '../Components/Heading';
 const Creator = () => {
   const DATA = ProfileData.default;
 
-  const Analytics = ({title, subTitle, icon}: any) => (
-    <View style={[Styles.flexCenter, {paddingVertical: 10}]}>
-      <CustomIcon
-        name={icon}
-        size={28}
-        color={Colors.GRAY}
-        style={{marginRight: 10}}
-      />
-      <View>
-        <Text style={{fontSize: 17, fontWeight: 'bold', color: Colors.BLACK}}>
-          {title}
-        </Text>
-        <TouchableOpacity onPress={() => {}}>
-          <Text style={{color: Colors.LIGHT_BLACK}}>{subTitle}</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={{backgroundColor: Colors.WHITE, marginBottom: 10}}>

@@ -75,26 +75,30 @@ export default function ShowPosts({item}: any) {
       </View>
 
       {item.content ? (
-        <Text
-          style={{
-            paddingHorizontal: 16,
-            color: Colors.BLACK,
-            marginVertical: 10,
-            textAlign: 'justify',
-          }}
-          numberOfLines={3}
-          ellipsizeMode="tail">
-          {item.content}
-        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate(Screens.COMMENT)}>
+          <Text
+            style={{
+              paddingHorizontal: 16,
+              color: Colors.BLACK,
+              marginVertical: 10,
+              textAlign: 'justify',
+            }}
+            numberOfLines={3}
+            ellipsizeMode="tail">
+            {item.content}
+          </Text>
+        </TouchableOpacity>
       ) : (
         <View style={{marginTop: 10}} />
       )}
 
       {item.hasImage ? (
-        <Image
-          source={item.postImage}
-          style={{height: hp(25), width: deviceWidth}}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate(Screens.COMMENT)}>
+          <Image
+            source={item.postImage}
+            style={{height: hp(25), width: deviceWidth}}
+          />
+        </TouchableOpacity>
       ) : null}
 
       <View

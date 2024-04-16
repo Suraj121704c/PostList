@@ -11,16 +11,16 @@ import {
 } from 'react-native-responsive-screen';
 
 // user defined imports
-import Screens from './Utils/Screens';
-import Profile from './Screens/Profile';
-import Home from './Screens/Home';
-import Notification from './Screens/Notification';
-import Colors from './Utils/Colors';
+import Screens from '../Utils/Screens';
+import Profile from '../Screens/Profile';
+import Home from '../Screens/Home';
+import Notification from '../Screens/Notification';
+import Colors from '../Utils/Colors';
 import {Button, Image, StatusBar} from 'react-native';
-import HeaderOptions from './Components/HeaderOptions';
-import Creator from './Screens/Creator';
-import Comments from './Screens/comments';
-import Images from './Utils/Images';
+import HeaderOptions from '../Components/HeaderOptions';
+import Creator from '../Screens/Creator';
+import Comments from '../Screens/comments';
+import Images from '../Utils/Images';
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
