@@ -11,11 +11,14 @@ import ShowEducation from '../Components/Profile/ShowEducation';
 import ShowLicenses from '../Components/Profile/ShowLicenses';
 import ShowCourses from '../Components/Profile/ShowCourses';
 import ShowProjects from '../Components/Profile/ShowProjects';
+import Colors from '../Utils/Colors';
+import Styles from '../Utils/Styles';
+import Heading from '../Components/Heading';
 
 const Creator = () => {
   const DATA = ProfileData.default;
 
-  const Analytics = ({title, subTitle, icon}:any) => (
+  const Analytics = ({title, subTitle, icon}: any) => (
     <View style={[Styles.flexCenter, {paddingVertical: 10}]}>
       <CustomIcon
         name={icon}

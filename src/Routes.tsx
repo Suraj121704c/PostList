@@ -27,7 +27,7 @@ const HomeStack = createNativeStackNavigator();
 const NotificationStack = createNativeStackNavigator();
 
 const HomeScreen = () => (
-  <HomeStack.Navigator screenOptions={{headerShown: false}}>
+  <HomeStack.Navigator screenOptions={{headerShown: false}} >
     <HomeStack.Screen name={Screens.HOME} component={Home} />
     <HomeStack.Screen name={Screens.PROFILE} component={Profile} />
     <HomeStack.Screen name={Screens.COMMENT} component={Comments} />
