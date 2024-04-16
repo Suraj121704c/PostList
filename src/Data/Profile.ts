@@ -4,7 +4,7 @@ const Profile = {
   INFO: {
     name: 'Your Name',
     company: 'M.I. Solutions',
-    profile_picture: Images.PROFILE_PICTURE,
+    profile_picture: Images.USERS.USER1,
     banner: Images.BANNERS.BANNER7,
     bio: 'Founder S.G.Codes | Developer@M.I.Solutions | React-Native Developer',
     talksAbout: [
