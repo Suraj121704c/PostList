@@ -15,7 +15,7 @@ import ShowProjects from '../Components/Profile/ShowProjects';
 const Creator = () => {
   const DATA = ProfileData.default;
 
-  const Analytics = ({title, subTitle, icon}) => (
+  const Analytics = ({title, subTitle, icon}:any) => (
     <View style={[Styles.flexCenter, {paddingVertical: 10}]}>
       <CustomIcon
         name={icon}

@@ -1,6 +1,6 @@
 import Images from '../Utils/Images';
 
-export default Profile = {
+const Profile = {
   INFO: {
     name: 'Your Name',
     company: 'M.I. Solutions',
@@ -177,3 +177,5 @@ export default Profile = {
     },
   ],
 };
+
+export default Profile;

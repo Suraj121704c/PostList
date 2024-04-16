@@ -5,14 +5,18 @@ import {
 } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+// user defined imports
 import Screens from './Utils/Screens';
 import Profile from './Screens/Profile';
 import Home from './Screens/Home';
-import Job from './Screens/Job';
 import Notification from './Screens/Notification';
 import Colors from './Utils/Colors';
-import {Image, StatusBar} from 'react-native';
-import CustomIcon from './Components/CustomIcon';
+import {Button, Image, StatusBar} from 'react-native';
 import HeaderOptions from './Components/HeaderOptions';
 import Creator from './Screens/Creator';
 import Comments from './Screens/comments';
@@ -20,7 +24,6 @@ import Images from './Utils/Images';
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
-const JobStack = createNativeStackNavigator();
 const NotificationStack = createNativeStackNavigator();
 
 const HomeScreen = () => (
@@ -32,10 +35,8 @@ const HomeScreen = () => (
   </HomeStack.Navigator>
 );
 
-const JobScreen = () => (
-  <JobStack.Navigator screenOptions={{headerShown: false}}>
-    <JobStack.Screen name={Screens.JOB} component={Job} />
-  </JobStack.Navigator>
+export const CustomDrawerButton = ({navigation}: any) => (
+  <Button onPress={() => navigation.toggleDrawer()} title="Open Drawer" />
 );
 
 const NotificationScreen = () => (
@@ -47,16 +48,16 @@ const NotificationScreen = () => (
   </NotificationStack.Navigator>
 );
 
-const showTabBar = route => {
+const showTabBar = (route: any) => {
   const routeName = getFocusedRouteNameFromRoute(route);
   return routeName == Screens.PROFILE ? 'none' : 'flex';
 };
 
 const header = (
-  navigation,
-  route,
-  icon,
-  title,
+  navigation: any,
+  route: any,
+  icon: any,
+  title: any,
   iconLeft = '',
   isPostScreen = false,
   isNotificationScreen = false,
@@ -64,7 +65,9 @@ const header = (
   title: title,
   tabBarStyle: {display: showTabBar(route)},
   tabBarBadge: isNotificationScreen ? 5 : null,
-  tabBarIcon: ({focused}) => <Image source={icon} />,
+  tabBarIcon: ({focused}: any) => (
+    <Image source={icon} style={{height: hp(3), width: wp(6.6)}} />
+  ),
   header: () => (
     <HeaderOptions
       iconLeft={iconLeft}
@@ -83,19 +86,19 @@ export default function Routes() {
           tabBarActiveTintColor: Colors.BLACK,
           tabBarInactiveTintColor: Colors.GRAY,
           tabBarLabelStyle: {fontWeight: 'bold'},
-          headerStyle: {elevation: 10},
+          headerStyle: {elevation: hp(2)},
         }}>
         <Tab.Screen
           name={Screens.HOME_STACK}
           component={HomeScreen}
-          options={({navigation, route}) =>
+          options={({navigation, route}): any =>
             header(navigation, route, Images.ROUTES.ROUTE1, 'Home')
           }
         />
         <Tab.Screen
           name={Screens.NOTIFICATION_STACK}
           component={NotificationScreen}
-          options={({navigation, route}) =>
+          options={({navigation, route}): any =>
             header(
               navigation,
               route,
@@ -107,20 +110,6 @@ export default function Routes() {
             )
           }
         />
-        {/* <Tab.Screen
-          name={Screens.JOB_STACK}
-          component={JobScreen}
-          options={({navigation, route}) =>
-            header(navigation, route, Images.ROUTES.ROUTE3, 'Jobs')
-          }
-        /> */}
-        {/* <Tab.Screen
-          name={Screens.COMMENT}
-          component={CommentScreen}
-          options={({navigation, route}) => {
-            header(navigation, route, 'comments', 'comment');
-          }}
-        /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );

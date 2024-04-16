@@ -1,9 +1,10 @@
-import Images from '../Utils/Images'
+import Images from '../Utils/Images';
 
-export default Notifications = [
+const Notifications = [
   {
     logo: Images.LOGOS.LOGO8,
-    description: "Your job alert for the role of Full Stack Developer in Bangalore.",
+    description:
+      'Your job alert for the role of Full Stack Developer in Bangalore.',
     notificationTime: 1,
     isNewJob: true,
     // isAView: false,
@@ -15,25 +16,27 @@ export default Notifications = [
   },
   {
     logo: Images.LOGOS.LOGO7,
-    description: "Aman Kumar Accepted your connection request.",
+    description: 'Aman Kumar Accepted your connection request.',
     notificationTime: 1,
-    isConnectionAccepted: true
+    isConnectionAccepted: true,
   },
   {
     logo: Images.LOGOS.LOGO9,
-    description: "A post by an employye at M.S. Enterprises is popular. Employee bonus by the company.",
+    description:
+      'A post by an employye at M.S. Enterprises is popular. Employee bonus by the company.',
     notificationTime: 1,
     isTrending: true,
     trendingCount: 10586,
   },
   {
     logo: Images.LOGOS.LOGO6,
-    description: "New from the Frontend Devs group. A new blog has been publised in the group. Click to view it.",
+    description:
+      'New from the Frontend Devs group. A new blog has been publised in the group. Click to view it.',
     notificationTime: 2,
   },
   {
     logo: Images.LOGOS.LOGO5,
-    description: "Your job alert for Backend Developer role in Mumbai.",
+    description: 'Your job alert for Backend Developer role in Mumbai.',
     notificationTime: 2,
     isJobAlert: true,
   },
@@ -45,37 +48,43 @@ export default Notifications = [
   },
   {
     logo: Images.LOGOS.LOGO3,
-    description: "15 people viewed your profile today.",
+    description: '15 people viewed your profile today.',
     notificationTime: 4,
     isAView: true,
   },
   {
     logo: Images.LOGOS.LOGO2,
-    description: "You have a new job suggestion in the Frontend Devs group. Click to view it.",
+    description:
+      'You have a new job suggestion in the Frontend Devs group. Click to view it.',
     notificationTime: 4,
     isNewJob: true,
   },
   {
     logo: Images.LOGOS.LOGO1,
-    description: "A new post at Geeks for Geeks is trending regarding the current market trends in Software Development.",
+    description:
+      'A new post at Geeks for Geeks is trending regarding the current market trends in Software Development.',
     notificationTime: 5,
     isTrending: true,
     trendingCount: 78424,
   },
   {
     logo: Images.LOGOS.LOGO8,
-    description: "You have a new job alert for your preferences.",
+    description: 'You have a new job alert for your preferences.',
     notificationTime: 7,
     isNewJob: true,
   },
   {
     logo: Images.LOGOS.LOGO3,
-    description: "A new blog has been publised in your community regarding developments in blockchain technology.",
+    description:
+      'A new blog has been publised in your community regarding developments in blockchain technology.',
     notificationTime: 7,
   },
   {
     logo: Images.LOGOS.LOGO9,
-    description: "Kashish was live. How an engineer spends his day in India 😁 ",
+    description:
+      'Kashish was live. How an engineer spends his day in India 😁 ',
     notificationTime: 7,
   },
-]
+];
+
+export default Notifications;

@@ -1,7 +1,8 @@
 import {Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
+
+// user defined imports
 import Colors from '../Utils/Colors';
-import CustomIcon from './CustomIcon';
 import Styles from '../Utils/Styles';
 
 export default function ShowAllFooter() {

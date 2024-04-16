@@ -1,5 +1,11 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+// user defined imports
 import Colors from '../Utils/Colors';
 import {deviceWidth} from './Dimensions';
 import Images from '../Utils/Images';
@@ -7,8 +13,8 @@ import Styles from '../Utils/Styles';
 import {useNavigation} from '@react-navigation/native';
 import Screens from '../Utils/Screens';
 
-export default function ShowPosts({item}) {
-  const navigation = useNavigation();
+export default function ShowPosts({item}: any) {
+  const navigation = useNavigation<any>();
   return (
     <View
       style={{
@@ -21,10 +27,10 @@ export default function ShowPosts({item}) {
           <Image
             source={item.profile_picture}
             style={{
-              height: 60,
-              width: 60,
-              borderRadius: 100,
-              marginHorizontal: 10,
+              height: hp(5.8),
+              width: wp(12.6),
+              borderRadius: wp(4),
+              marginHorizontal: hp(1),
             }}
           />
         </TouchableOpacity>
@@ -33,30 +39,28 @@ export default function ShowPosts({item}) {
             style={Styles.flexCenter}
             onPress={() => navigation.navigate(Screens.CREATOR)}>
             <Text
-              style={{fontSize: 16, color: Colors.BLACK, fontWeight: 'bold'}}>
+              style={{
+                fontSize: hp(2),
+                color: Colors.BLACK,
+                fontWeight: 'bold',
+              }}>
               {item.name}
             </Text>
             {item.connection ? (
-              <Text style={{fontWeight: 'bold'}}>
-                {/* <Icon size={16} name="dot-single" color={Colors.GRAY} /> */}
-                {item.connection}
-              </Text>
+              <Text style={{fontWeight: 'bold'}}>{item.connection}</Text>
             ) : null}
           </TouchableOpacity>
-          <Text style={{width: 180}} numberOfLines={1} ellipsizeMode="tail">
+          <Text style={{width: wp(100)}} numberOfLines={1} ellipsizeMode="tail">
             {item.title}
           </Text>
-          <Text style={{fontSize: 11}}>{item.timeAgo} hr</Text>
+          <Text style={{fontSize: hp(2)}}>{item.timeAgo} hr</Text>
         </View>
         {item.connection ? (
           <TouchableOpacity
             onPress={() => {}}
-            style={{width: 80, alignItems: 'flex-end'}}>
-            {/* <Icon name="dots-three-vertical" size={19} color={Colors.GRAY} /> */}
-          </TouchableOpacity>
+            style={{width: 80, alignItems: 'flex-end'}}></TouchableOpacity>
         ) : (
           <TouchableOpacity onPress={() => {}} style={Styles.flexCenter}>
-            {/* <Icon name="plus" color={Colors.BLUE} size={22} /> */}
             <Text
               style={{
                 fontSize: 19,
@@ -89,7 +93,7 @@ export default function ShowPosts({item}) {
       {item.hasImage ? (
         <Image
           source={item.postImage}
-          style={{height: 300, width: deviceWidth}}
+          style={{height: hp(25), width: deviceWidth}}
         />
       ) : null}
 
@@ -134,10 +138,11 @@ export default function ShowPosts({item}) {
           },
         ]}>
         <TouchableOpacity onPress={() => {}} style={{alignItems: 'center'}}>
-          <Image source={Images.IMG.LIKE} />
-          <Text style={{color: item.isLiked ? Colors.BLUE : Colors.GRAY}}>
-            Like
-          </Text>
+          <Image
+            source={Images.IMG.LIKE}
+            style={{height: hp(3.3), width: wp(7)}}
+          />
+          <Text style={{color: Colors.BLUE}}>Like</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -145,13 +150,19 @@ export default function ShowPosts({item}) {
           onPress={() => {
             navigation.navigate(Screens.COMMENT);
           }}>
-          <Image source={Images.IMG.CHAT} />
-          <Text>comment</Text>
+          <Image
+            source={Images.IMG.CHAT}
+            style={{height: hp(3.3), width: wp(7)}}
+          />
+          <Text style={{color: Colors.BLUE}}>comment</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={{alignItems: 'center'}} onPress={() => {}}>
-          <Image source={Images.IMG.SEND} />
-          <Text>share</Text>
+          <Image
+            source={Images.IMG.SEND}
+            style={{height: hp(3.3), width: wp(7)}}
+          />
+          <Text style={{color: Colors.BLUE}}>share</Text>
         </TouchableOpacity>
       </View>
     </View>
