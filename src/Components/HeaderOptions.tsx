@@ -31,7 +31,7 @@ const HeaderOptions = ({navigation, iconLeft, isPostScreen}: any) => (
       ) : (
         <TouchableOpacity onPress={() => navigation.navigate(Screens.PROFILE)}>
           <Image
-            source={Images.PROFILE_PICTURE}
+            source={Images.USERS.USER1}
             style={{borderRadius: wp(4), height: hp(4.8), width: wp(10.2)}}
           />
         </TouchableOpacity>

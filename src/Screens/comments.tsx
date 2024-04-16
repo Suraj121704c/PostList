@@ -20,9 +20,10 @@ import Images from '../Utils/Images';
 import {useNavigation} from '@react-navigation/native';
 import Styles from '../Utils/Styles';
 import Colors from '../Utils/Colors';
+import Screens from '../Utils/Screens';
 
 const Comments = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const [Comments, SetComments] = useState<any>([]);
   const [commentValue, setCommentValue] = useState('');
   const [showComment, setShowComment] = useState(false);
