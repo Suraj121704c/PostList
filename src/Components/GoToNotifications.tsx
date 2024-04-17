@@ -1,9 +1,12 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import CustomIcon from './CustomIcon';
-import Styles from '../Utils/Styles';
 
-export default function GoToNotifications({navigation}) {
+// user defined imports
+import Styles from '../Utils/Styles';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import Screens from '../Utils/Screens';
+
+export default function GoToNotifications({navigation}:any) {
   return (
     <View
       style={{
@@ -25,12 +28,6 @@ export default function GoToNotifications({navigation}) {
           backgroundColor: Colors.BLUE,
           elevation: 5,
         }]}>
-        <CustomIcon
-          name="notifications"
-          size={19}
-          color={Colors.WHITE}
-          style={{marginRight: 10}}
-        />
         <Text style={{color: Colors.WHITE, fontSize: 16, fontWeight: 'bold'}}>
           Go To Notifications
         </Text>

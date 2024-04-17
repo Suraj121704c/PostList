@@ -4,8 +4,8 @@ import Colors from '../Utils/Colors';
 import CustomIcon from './CustomIcon';
 import Styles from '../Utils/Styles';
 
-export default ShowNotifications = ({item}) => {
-  const CTA = ({title}) => (
+const ShowNotifications = ({item}: any) => {
+  const CTA = ({title}: any) => (
     <TouchableOpacity
       onPress={() => {}}
       style={{
@@ -67,3 +67,5 @@ export default ShowNotifications = ({item}) => {
     </View>
   );
 };
+
+export default ShowNotifications;

@@ -7,7 +7,6 @@ import {
 
 // user defined import
 import Styles from '../Utils/Styles';
-import CustomIcon from './CustomIcon';
 import Images from '../Utils/Images';
 import Colors from '../Utils/Colors';
 import Screens from '../Utils/Screens';
@@ -33,7 +32,6 @@ const HeaderOptions = ({
     <View style={{paddingLeft: wp(2)}}>
       {isPostScreen ? (
         <TouchableOpacity onPress={() => navigation.navigate(Screens.HOME)}>
-          <CustomIcon name={iconLeft} size={34} color={Colors.BLACK} />
         </TouchableOpacity>
       ) : (
         <TouchableOpacity onPress={() => navigation.navigate(Screens.PROFILE)}>

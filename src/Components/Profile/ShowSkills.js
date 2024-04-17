@@ -1,8 +1,9 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+
+// user defined imports
 import Colors from '../../Utils/Colors';
 import Styles from '../../Utils/Styles';
-import CustomIcon from '../CustomIcon';
 
 const ShowSkills = ({DATA}) => DATA.SKILLS.map(item => (
   <View
