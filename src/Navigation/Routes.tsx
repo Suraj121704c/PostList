@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   getFocusedRouteNameFromRoute,
   NavigationContainer,
@@ -21,13 +21,15 @@ import HeaderOptions from '../Components/HeaderOptions';
 import Creator from '../Screens/Creator';
 import Comments from '../Screens/comments';
 import Images from '../Utils/Images';
+import {useDispatch} from 'react-redux';
+import {searchAction} from '../Redux/Actions/postAction';
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
 const NotificationStack = createNativeStackNavigator();
 
 const HomeScreen = () => (
-  <HomeStack.Navigator screenOptions={{headerShown: false}} >
+  <HomeStack.Navigator screenOptions={{headerShown: false}}>
     <HomeStack.Screen name={Screens.HOME} component={Home} />
     <HomeStack.Screen name={Screens.PROFILE} component={Profile} />
     <HomeStack.Screen name={Screens.COMMENT} component={Comments} />
@@ -53,31 +55,49 @@ const showTabBar = (route: any) => {
   return routeName == Screens.PROFILE ? 'none' : 'flex';
 };
 
-const header = (
-  navigation: any,
-  route: any,
-  icon: any,
-  title: any,
-  iconLeft = '',
-  isPostScreen = false,
-  isNotificationScreen = false,
-) => ({
-  title: title,
-  tabBarStyle: {display: showTabBar(route)},
-  tabBarBadge: isNotificationScreen ? 5 : null,
-  tabBarIcon: ({focused}: any) => (
-    <Image source={icon} style={{height: hp(3), width: wp(6.6)}} />
-  ),
-  header: () => (
-    <HeaderOptions
-      iconLeft={iconLeft}
-      navigation={navigation}
-      isPostScreen={isPostScreen}
-    />
-  ),
-});
-
 export default function Routes() {
+  const [search, setSearch] = useState('');
+  const dispatch = useDispatch<any>();
+
+  const handleSearchTextChange = (text: any) => {
+    setSearch(text);
+  };
+
+  const handleSearchSubmit = () => {
+    handleSearchTextChange(search);
+  };
+
+  useEffect(() => {
+    dispatch(searchAction(search));
+  }, [handleSearchSubmit]);
+
+  const header = (
+    navigation: any,
+    route: any,
+    icon: any,
+    title: any,
+    iconLeft = '',
+    isPostScreen = false,
+    isNotificationScreen = false,
+  ) => ({
+    title: title,
+    tabBarStyle: {display: showTabBar(route)},
+    tabBarBadge: isNotificationScreen ? 5 : null,
+    tabBarIcon: ({focused}: any) => (
+      <Image source={icon} style={{height: hp(3), width: wp(6.6)}} />
+    ),
+    header: () => (
+      <HeaderOptions
+        iconLeft={iconLeft}
+        navigation={navigation}
+        isPostScreen={isPostScreen}
+        handleSearchTextChange={handleSearchTextChange}
+        search={search}
+        handleSearchSubmit={handleSearchSubmit}
+      />
+    ),
+  });
+
   return (
     <NavigationContainer>
       <StatusBar backgroundColor={Colors.WHITE} barStyle="dark-content" />

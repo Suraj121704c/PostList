@@ -42,3 +42,22 @@ export const postActionById = (id: any) => {
       });
   };
 };
+
+export const searchAction = (name: any) => {
+  return (dispatch: any) => {
+    const url = `https://plum-motionless-shrimp.cyclic.app/post?name=${name}`;
+    axios
+      .get(url)
+      .then((res: any) => {
+        dispatch({
+          type: Data_Success,
+          payload: res?.data,
+        });
+      })
+      .catch((err: any) => {
+        dispatch({
+          type: Data_Failed,
+        });
+      });
+  };
+};

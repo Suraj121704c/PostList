@@ -12,7 +12,14 @@ import Images from '../Utils/Images';
 import Colors from '../Utils/Colors';
 import Screens from '../Utils/Screens';
 
-const HeaderOptions = ({navigation, iconLeft, isPostScreen}: any) => (
+const HeaderOptions = ({
+  navigation,
+  iconLeft,
+  isPostScreen,
+  search,
+  handleSearchTextChange,
+  handleSearchSubmit,
+}: any) => (
   <View
     style={[
       Styles.flexCenter,
@@ -62,6 +69,9 @@ const HeaderOptions = ({navigation, iconLeft, isPostScreen}: any) => (
           paddingHorizontal: wp(4),
           color: Colors.BLACK,
         }}
+        value={search}
+        onChangeText={handleSearchTextChange}
+        onSubmitEditing={handleSearchSubmit}
       />
     )}
 

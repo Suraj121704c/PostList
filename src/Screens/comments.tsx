@@ -85,7 +85,7 @@ const Comments = () => {
       <ScrollView>
         <View style={Styles.flexCenter}>
           <TouchableOpacity
-            onPress={() => navigation.navigate(Screens.CREATOR)}>
+            onPress={() => navigation.navigate(Screens.CREATOR, {id: id})}>
             <Image
               source={{uri: id_data[0]?.profile_picture}}
               style={{
@@ -99,7 +99,7 @@ const Comments = () => {
           <View>
             <TouchableOpacity
               style={Styles.flexCenter}
-              onPress={() => navigation.navigate(Screens.CREATOR)}>
+              onPress={() => navigation.navigate(Screens.CREATOR, {id: id})}>
               <Text
                 style={{fontSize: 16, color: Colors.BLACK, fontWeight: 'bold'}}>
                 {id_data[0]?.name}
