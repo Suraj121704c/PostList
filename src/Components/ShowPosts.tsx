@@ -18,6 +18,7 @@ import {Loader} from './Loader';
 export default function ShowPosts({item}: any) {
   const navigation = useNavigation<any>();
   const {data, loading, error} = useSelector((state: any) => state.postReducer);
+  const id = item?.id;
 
   return (
     <View
@@ -28,7 +29,8 @@ export default function ShowPosts({item}: any) {
       }}>
       {loading && <Loader />}
       <View style={Styles.flexCenter}>
-        <TouchableOpacity onPress={() => navigation.navigate(Screens.CREATOR)}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(Screens.CREATOR, {id: id})}>
           <Image
             source={{uri: item?.profile_picture}}
             style={{
@@ -42,7 +44,7 @@ export default function ShowPosts({item}: any) {
         <View>
           <TouchableOpacity
             style={Styles.flexCenter}
-            onPress={() => navigation.navigate(Screens.CREATOR)}>
+            onPress={() => navigation.navigate(Screens.CREATOR, {id: id})}>
             <Text
               style={{
                 fontSize: hp(2),
@@ -80,7 +82,8 @@ export default function ShowPosts({item}: any) {
       </View>
 
       {item.content ? (
-        <TouchableOpacity onPress={() => navigation.navigate(Screens.COMMENT)}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(Screens.COMMENT, {id: id})}>
           <Text
             style={{
               paddingHorizontal: 16,
@@ -98,7 +101,8 @@ export default function ShowPosts({item}: any) {
       )}
 
       {item.hasImage ? (
-        <TouchableOpacity onPress={() => navigation.navigate(Screens.COMMENT)}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(Screens.COMMENT, {id: id})}>
           <Image
             source={{uri: item?.postImage}}
             style={{height: hp(25), width: deviceWidth}}
@@ -157,7 +161,7 @@ export default function ShowPosts({item}: any) {
         <TouchableOpacity
           style={{alignItems: 'center'}}
           onPress={() => {
-            navigation.navigate(Screens.COMMENT);
+            navigation.navigate(Screens.COMMENT, {id: id});
           }}>
           <Image
             source={Images.IMG.CHAT}

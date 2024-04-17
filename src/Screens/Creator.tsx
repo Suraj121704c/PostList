@@ -1,5 +1,5 @@
 import {View, Text, ScrollView, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 
 // user defined imports
 import * as ProfileData from '../Data/Profile';
@@ -14,16 +14,31 @@ import ShowProjects from '../Components/Profile/ShowProjects';
 import Colors from '../Utils/Colors';
 import Styles from '../Utils/Styles';
 import Heading from '../Components/Heading';
+import {useRoute} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {postActionById} from '../Redux/Actions/postAction';
 
 const Creator = () => {
   const DATA = ProfileData.default;
+  const dispatch = useDispatch<any>();
+  const route = useRoute<any>();
+  const {id} = route?.params;
+  const {data, loading, error, id_data} = useSelector(
+    (state: any) => state.postReducer,
+  );
+
+  useEffect(() => {
+    dispatch(postActionById(id));
+  }, []);
+
+  console.log(id_data[0]?.name, '--------');
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={{backgroundColor: Colors.WHITE, marginBottom: 10}}>
         <Image source={DATA.INFO.banner} style={{width: '100%', height: 100}} />
         <Image
-          source={DATA.INFO.profile_picture}
+          source={{uri: id_data[0]?.profile_picture}}
           style={{
             height: 100,
             width: 100,
@@ -35,10 +50,10 @@ const Creator = () => {
         />
         <View style={{marginTop: -45, paddingHorizontal: 10}}>
           <Text style={{fontSize: 28, color: Colors.BLACK, fontWeight: 'bold'}}>
-            {DATA.INFO.name}
+            {id_data[0]?.name}
           </Text>
           <Text style={{color: Colors.BLACK, fontSize: 16}}>
-            {DATA.INFO.bio}
+            {id_data[0]?.title}
           </Text>
           <Text style={{marginTop: 4, marginBottom: 10}}>
             Talks about - {DATA.INFO.talksAbout.map(item => `${item} `)}

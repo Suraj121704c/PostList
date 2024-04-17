@@ -8,7 +8,7 @@ import {
   Button,
   ScrollView,
 } from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -17,21 +17,30 @@ import {
 // user defined imports
 import {deviceWidth} from '../Components/Dimensions';
 import Images from '../Utils/Images';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import Styles from '../Utils/Styles';
 import Colors from '../Utils/Colors';
 import Screens from '../Utils/Screens';
+import {useDispatch, useSelector} from 'react-redux';
+import {postActionById} from '../Redux/Actions/postAction';
 
 const Comments = () => {
   const navigation = useNavigation<any>();
+  const dispatch = useDispatch<any>();
   const [Comments, SetComments] = useState<any>([
     {
-      id : 1 , 
-      commentValue : "In commodo eu nulla duis adipisicing proident Lorem qui incididunt"
-    }
+      id: 1,
+      commentValue:
+        'In commodo eu nulla duis adipisicing proident Lorem qui incididunt',
+    },
   ]);
   const [commentValue, setCommentValue] = useState('');
   const InputRef = useRef<any>();
+  const route = useRoute<any>();
+  const {id} = route?.params;
+  const {data, loading, error, id_data} = useSelector(
+    (state: any) => state.postReducer,
+  );
 
   const item = {
     profile_picture: Images.USERS.USER1,
@@ -53,14 +62,17 @@ const Comments = () => {
       id: GenerateUniqueID(),
       commentValue: commentValue,
     };
-    SetComments([...Comments, temp]); // Adds comment to Array
-    InputRef.current.clear(); // This clears the TextInput Field
+    SetComments([...Comments, temp]);
+    InputRef.current.clear();
   };
 
-  // Function to Generate a Unique ID for array elements
   const GenerateUniqueID = () => {
     return Math.floor(Math.random() * Date.now()).toString();
   };
+
+  useEffect(() => {
+    dispatch(postActionById(id));
+  }, []);
 
   return (
     <View
@@ -75,7 +87,7 @@ const Comments = () => {
           <TouchableOpacity
             onPress={() => navigation.navigate(Screens.CREATOR)}>
             <Image
-              source={item.profile_picture}
+              source={{uri: id_data[0]?.profile_picture}}
               style={{
                 height: 60,
                 width: 60,
@@ -90,16 +102,18 @@ const Comments = () => {
               onPress={() => navigation.navigate(Screens.CREATOR)}>
               <Text
                 style={{fontSize: 16, color: Colors.BLACK, fontWeight: 'bold'}}>
-                {item.name}
+                {id_data[0]?.name}
               </Text>
               {item.connection ? (
-                <Text style={{fontWeight: 'bold'}}>{item.connection}</Text>
+                <Text style={{fontWeight: 'bold'}}>
+                  {id_data[0]?.connection}
+                </Text>
               ) : null}
             </TouchableOpacity>
             <Text style={{width: 180}} numberOfLines={1} ellipsizeMode="tail">
-              {item.title}
+              {id_data[0]?.title}
             </Text>
-            <Text style={{fontSize: 11}}>{item.timeAgo} hr</Text>
+            <Text style={{fontSize: 11}}>{id_data[0]?.timeAgo} hr</Text>
           </View>
           {item.connection ? (
             <TouchableOpacity
@@ -120,7 +134,7 @@ const Comments = () => {
           )}
         </View>
 
-        {item.content ? (
+        {id_data[0]?.content ? (
           <Text
             style={{
               paddingHorizontal: 16,
@@ -130,15 +144,15 @@ const Comments = () => {
             }}
             numberOfLines={3}
             ellipsizeMode="tail">
-            {item.content}
+            {id_data[0]?.content}
           </Text>
         ) : (
           <View style={{marginTop: 10}} />
         )}
 
-        {item.hasImage ? (
+        {id_data[0]?.postImage ? (
           <Image
-            source={item.postImage}
+            source={{uri: id_data[0]?.postImage}}
             style={{height: hp(25), width: deviceWidth}}
           />
         ) : null}
@@ -157,10 +171,12 @@ const Comments = () => {
               style={{height: 25, width: 25, borderRadius: 100}}
               source={Images.LIKE}
             />
-            <Text>{item.likes} likes</Text>
+            <Text>{id_data[0]?.likes} likes</Text>
           </View>
           <View style={Styles.flexCenter}>
-            {item.comments > 0 ? <Text>{item.comments} comments</Text> : null}
+            {item.comments > 0 ? (
+              <Text>{id_data[0]?.comments} comments</Text>
+            ) : null}
           </View>
         </View>
 
@@ -199,7 +215,10 @@ const Comments = () => {
                   source={Images.IMG.ADMIN}
                   style={{height: hp(3), width: wp(6)}}
                 />
-                <Text style={{fontSize: hp(2) , marginLeft : wp(2) , color : "blue"}}>xyz@gmail.com</Text>
+                <Text
+                  style={{fontSize: hp(2), marginLeft: wp(2), color: 'blue'}}>
+                  xyz@gmail.com
+                </Text>
               </View>
               <Text style={{color: '#000', marginTop: hp(1)}}>
                 {c.commentValue}

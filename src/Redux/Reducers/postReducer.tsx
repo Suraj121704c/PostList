@@ -1,9 +1,15 @@
-import {Data_Failed, Data_Request, Data_Success} from '../types';
+import {
+  Data_Failed,
+  Data_Request,
+  Data_Success,
+  Post_Data_Success,
+} from '../types';
 
 const Initial_State = {
   data: '',
   loading: false,
   error: false,
+  id_data: '',
 };
 
 export const postReducer = (state = Initial_State, action: any) => {
@@ -27,6 +33,13 @@ export const postReducer = (state = Initial_State, action: any) => {
         ...state,
         loading: false,
         error: true,
+      };
+    }
+    case Post_Data_Success: {
+      return {
+        ...state,
+        loading: false,
+        id_data: action.payload,
       };
     }
     default: {

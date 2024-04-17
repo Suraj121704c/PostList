@@ -1,13 +1,15 @@
 import axios from 'axios';
 import {BaseUrl} from '../Api';
-import {Data_Failed, Data_Request, Data_Success} from '../types';
+import {
+  Data_Failed,
+  Data_Request,
+  Data_Success,
+  Post_Data_Success,
+} from '../types';
 
 export const postActions = () => {
   return (dispatch: any) => {
     const url = BaseUrl;
-    dispatch({
-      type: Data_Request,
-    });
     axios
       .get(url)
       .then((res: any) => {
@@ -20,7 +22,23 @@ export const postActions = () => {
         dispatch({
           type: Data_Failed,
         });
-        console.log(err, "-------------")
+      });
+  };
+};
+
+export const postActionById = (id: any) => {
+  return (dispatch: any) => {
+    const url = BaseUrl + `?id=${id}`;
+    axios
+      .get(url)
+      .then((res: any) => {
+        dispatch({
+          type: Post_Data_Success,
+          payload: res?.data,
+        });
+      })
+      .catch((err: any) => {
+        console.log(err);
       });
   };
 };
