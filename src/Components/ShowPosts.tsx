@@ -12,20 +12,25 @@ import Images from '../Utils/Images';
 import Styles from '../Utils/Styles';
 import {useNavigation} from '@react-navigation/native';
 import Screens from '../Utils/Screens';
+import {useSelector} from 'react-redux';
+import {Loader} from './Loader';
 
 export default function ShowPosts({item}: any) {
   const navigation = useNavigation<any>();
+  const {data, loading, error} = useSelector((state: any) => state.postReducer);
+
   return (
     <View
       style={{
         backgroundColor: Colors.WHITE,
-        marginVertical: 5,
-        paddingVertical: 10,
+        marginVertical: hp(1),
+        paddingVertical: wp(2),
       }}>
+      {loading && <Loader />}
       <View style={Styles.flexCenter}>
         <TouchableOpacity onPress={() => navigation.navigate(Screens.CREATOR)}>
           <Image
-            source={item.profile_picture}
+            source={{uri: item?.profile_picture}}
             style={{
               height: hp(5.8),
               width: wp(12.6),
@@ -44,7 +49,7 @@ export default function ShowPosts({item}: any) {
                 color: Colors.BLACK,
                 fontWeight: 'bold',
               }}>
-              {item.name}
+              {item?.name}
             </Text>
             {item.connection ? (
               <Text style={{fontWeight: 'bold'}}>{item.connection}</Text>
@@ -95,7 +100,7 @@ export default function ShowPosts({item}: any) {
       {item.hasImage ? (
         <TouchableOpacity onPress={() => navigation.navigate(Screens.COMMENT)}>
           <Image
-            source={item.postImage}
+            source={{uri: item?.postImage}}
             style={{height: hp(25), width: deviceWidth}}
           />
         </TouchableOpacity>

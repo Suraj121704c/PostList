@@ -2,8 +2,8 @@ import Images from '../Utils/Images';
 
 const Profile = {
   INFO: {
-    name: 'Your Name',
-    company: 'M.I. Solutions',
+    name: 'Marley Queen',
+    company: 'Vaave Solutions',
     profile_picture: Images.USERS.USER1,
     banner: Images.BANNERS.BANNER7,
     bio: 'Founder S.G.Codes | Developer@M.I.Solutions | React-Native Developer',
