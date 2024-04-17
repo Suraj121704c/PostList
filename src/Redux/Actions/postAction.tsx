@@ -31,6 +31,9 @@ export const postActions = () => {
 
 export const postActionById = (id: any) => {
   return (dispatch: any) => {
+    dispatch({
+      type: Data_Request,
+    });
     const url = BaseUrl + `?id=${id}`;
     axios
       .get(url)

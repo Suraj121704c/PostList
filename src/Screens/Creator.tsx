@@ -17,6 +17,7 @@ import Heading from '../Components/Heading';
 import {useRoute} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {postActionById} from '../Redux/Actions/postAction';
+import {Loader} from '../Components/Loader';
 
 const Creator = () => {
   const DATA = ProfileData.default;
@@ -30,8 +31,6 @@ const Creator = () => {
   useEffect(() => {
     dispatch(postActionById(id));
   }, []);
-
-  console.log(id_data[0]?.name, '--------');
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>

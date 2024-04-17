@@ -23,6 +23,7 @@ import Colors from '../Utils/Colors';
 import Screens from '../Utils/Screens';
 import {useDispatch, useSelector} from 'react-redux';
 import {postActionById} from '../Redux/Actions/postAction';
+import {Loader} from '../Components/Loader';
 
 const Comments = () => {
   const navigation = useNavigation<any>();
