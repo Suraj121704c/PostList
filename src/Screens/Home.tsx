@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {postActions} from '../Redux/Actions/postAction';
 import ShowPosts from '../Components/ShowPosts';
 import Posts from '../Data/Posts';
+import {Loader} from '../Components/Loader';
 
 export default function Home() {
   const dispatch = useDispatch<any>();
@@ -15,8 +16,11 @@ export default function Home() {
     dispatch(postActions());
   }, []);
 
+  console.log(loading)
+
   return (
     <SafeAreaView>
+      {loading && <Loader />}
       <FlatList
         data={data}
         showsVerticalScrollIndicator={false}

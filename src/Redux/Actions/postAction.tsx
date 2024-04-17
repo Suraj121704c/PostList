@@ -10,6 +10,9 @@ import {
 export const postActions = () => {
   return (dispatch: any) => {
     const url = BaseUrl;
+    dispatch({
+      type: Data_Request,
+    });
     axios
       .get(url)
       .then((res: any) => {

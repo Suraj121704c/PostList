@@ -17,7 +17,6 @@ import {Loader} from './Loader';
 
 export default function ShowPosts({item}: any) {
   const navigation = useNavigation<any>();
-  const {data, loading, error} = useSelector((state: any) => state.postReducer);
   const id = item?.id;
 
   return (
@@ -27,7 +26,6 @@ export default function ShowPosts({item}: any) {
         marginVertical: hp(1),
         paddingVertical: wp(2),
       }}>
-      {loading && <Loader />}
       <View style={Styles.flexCenter}>
         <TouchableOpacity
           onPress={() => navigation.navigate(Screens.CREATOR, {id: id})}>
@@ -128,9 +126,6 @@ export default function ShowPosts({item}: any) {
         </View>
         <View style={Styles.flexCenter}>
           {item.comments > 0 ? <Text>{item.comments} comments</Text> : null}
-          {/* {item.comments > 0 && item.shares > 0 ? (
-            <Icon name="dot-single" size={16} color={Colors.GRAY} />
-          ) : null} */}
         </View>
       </View>
 
