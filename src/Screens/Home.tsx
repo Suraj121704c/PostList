@@ -18,11 +18,7 @@ export default function Home() {
   }, []);
 
   const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
     dispatch(postActions());
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
   }, []);
 
   return (

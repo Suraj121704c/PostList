@@ -173,7 +173,7 @@ export default function ShowPosts({item}: any) {
 
         <TouchableOpacity
           style={{alignItems: 'center'}}
-          onPress={() => navigation.navigate(Screens.CREATE)}>
+          onPress={() => navigation.navigate(Screens.CREATE, {id: id})}>
           <Image
             source={Images.IMG.EDIT}
             style={{height: hp(3.3), width: wp(7)}}

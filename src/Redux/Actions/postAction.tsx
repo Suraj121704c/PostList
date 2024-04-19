@@ -101,7 +101,7 @@ export const DeletePostAction = (id: any) => {
       .then((res: any) => {
         console.log(res);
         Alert.alert('Data Deleted Successfully', 'success');
-        postActions();
+        dispatch(postActions());
       })
       .catch((err: any) => {
         Alert.alert(err, 'Error');
@@ -109,20 +109,18 @@ export const DeletePostAction = (id: any) => {
   };
 };
 
-
-export const putPostAction = (id: any) => {
+export const putPostAction = (id: any, data: any) => {
   return (dispatch: any) => {
     const url = `${BaseUrl2}/${id}`;
     axios
-      .delete(url)
+      .put(url, data)
       .then((res: any) => {
         console.log(res);
-        Alert.alert('Data Edited Successfully', 'success');
-        postActions();
+        Alert.alert('Data Updated Successfully', 'success');
+        dispatch(postActions());
       })
       .catch((err: any) => {
         Alert.alert(err, 'Error');
       });
   };
 };
-

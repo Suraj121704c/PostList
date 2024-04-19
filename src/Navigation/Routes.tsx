@@ -37,6 +37,7 @@ const HomeScreen = () => (
     <HomeStack.Screen name={Screens.PROFILE} component={Profile} />
     <HomeStack.Screen name={Screens.COMMENT} component={Comments} />
     <HomeStack.Screen name={Screens.CREATOR} component={Creator} />
+    <NotificationStack.Screen name={Screens.CREATE} component={Create} />
   </HomeStack.Navigator>
 );
 

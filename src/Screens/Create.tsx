@@ -7,7 +7,7 @@ import {
   TextInput,
   SafeAreaView,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -16,16 +16,31 @@ import {
 import Button from '../Components/Button';
 import Images from '../Utils/Images';
 import {useRoute} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
-import {CreatePostAction} from '../Redux/Actions/postAction';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  CreatePostAction,
+  postActionById,
+  putPostAction,
+} from '../Redux/Actions/postAction';
+import {Loader} from '../Components/Loader';
 
 const Create = () => {
-  const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch<any>();
+  const route = useRoute<any>();
+  const {id} = route?.params || {};
+  const {data, loading, error, id_data} = useSelector(
+    (state: any) => state.postReducer,
+  );
+
+  useEffect(() => {
+    if (id) {
+      dispatch(postActionById(id));
+    }
+  }, []);
 
   const generateRandomId = () => {
     const timestamp = new Date().getTime();
-    const randomString = Math.random().toString(36).substring(7); // Using substring to remove '0.' and taking only the characters after
+    const randomString = Math.random().toString(36).substring(7);
     return `${timestamp}-${randomString}`;
   };
 
@@ -37,14 +52,27 @@ const Create = () => {
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6JPOHWcXuh4vYdBUF-QxVlo0SIKAZ7iARahQliwZK0sfF6jaQsTsJF3s1_oY8xuLPgT8&usqp=CAU',
     name: '',
     title: '',
-    timeAgo: 10,
+    timeAgo: 1,
     content: '',
     hasImage: false,
     shares: 5,
     comments: 2,
     likes: 17,
     isLiked: true,
-    email: '',
+  });
+
+  const [editPost, setEditPost] = useState({
+    id: id_data[0]?.id,
+    profile_picture: id_data[0]?.profile_picture,
+    name: id_data[0]?.name,
+    title: id_data[0]?.content,
+    timeAgo: id_data[0]?.timeAgo,
+    content: id_data[0]?.content,
+    hasImage: id_data[0]?.hasImage,
+    shares: id_data[0]?.hasImage,
+    comments: id_data[0]?.comments,
+    likes: id_data[0]?.likes,
+    isLiked: id_data[0]?.isLiked,
   });
 
   const addCustomer = () => {
@@ -62,7 +90,6 @@ const Create = () => {
       comments: 2,
       likes: 17,
       isLiked: true,
-      email: '',
     });
   };
 
@@ -73,59 +100,126 @@ const Create = () => {
     });
   };
 
+  const handleEditChangeText = (value: any, name: any) => {
+    setEditPost({
+      ...userData,
+      [name]: value,
+    });
+  };
+
+  const editAction = () => {
+    if (id) {
+      dispatch(putPostAction(id, editPost));
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={styles.scrollViewContainer}>
-        <View style={styles.userView}>
-          <Image source={Images.USERS.USER1} style={styles.userImage} />
-        </View>
+      {id ? (
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.scrollViewContainer}>
+          <View style={styles.userView}>
+            <Image
+              source={{uri: id_data[0]?.profile_picture}}
+              style={styles.userImage}
+            />
+          </View>
 
-        <Text style={styles.text}>Name</Text>
-        <TextInput
-          placeholder="Enter your Name"
-          style={styles.textInputStyle}
-          onChangeText={(value: string) => {
-            handleOnChangeText(value, 'name');
-          }}
-        />
+          <Text style={styles.text}>Name</Text>
+          <TextInput
+            placeholder="Enter your Name"
+            style={styles.textInputStyle}
+            value={id_data[0]?.name}
+            onChangeText={(value: string) => {
+              handleEditChangeText(value, 'name');
+            }}
+          />
 
-        <Text style={styles.text}>Content</Text>
-        <TextInput
-          placeholder="Write Post"
-          style={styles.textInputStyle}
-          onChangeText={(value: string) => {
-            handleOnChangeText(value, 'content');
-          }}
-          multiline={true}
-          numberOfLines={4}
-        />
+          <Text style={styles.text}>Title</Text>
+          <TextInput
+            placeholder="Enter Title"
+            value={editPost?.title}
+            style={styles.textInputStyle}
+            onChangeText={(value: string) => {
+              handleEditChangeText(value, 'title');
+            }}
+          />
 
-        <Text style={styles.text}>Title</Text>
-        <TextInput
-          placeholder="Enter Title"
-          style={styles.textInputStyle}
-          onChangeText={(value: string) => {
-            handleOnChangeText(value, 'title');
-          }}
-        />
+          <Text style={styles.text}>Content</Text>
+          <TextInput
+            placeholder="Write Post"
+            value={editPost?.content}
+            style={styles.textAreaStyle}
+            onChangeText={(value: string) => {
+              handleEditChangeText(value, 'content');
+            }}
+            multiline={true}
+            numberOfLines={10}
+          />
+        </ScrollView>
+      ) : (
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.scrollViewContainer}>
+          <View style={styles.userView}>
+            <Image source={Images.USERS.USER1} style={styles.userImage} />
+          </View>
 
-        <Text style={styles.text}>Email</Text>
-        <TextInput
-          placeholder="Enter email"
-          style={styles.textInputStyle}
-          onChangeText={(value: string) => {
-            handleOnChangeText(value, 'email');
-          }}
+          <Text style={styles.text}>Name</Text>
+          <TextInput
+            placeholder="Enter your Name"
+            style={styles.textInputStyle}
+            onChangeText={(value: string) => {
+              handleOnChangeText(value, 'name');
+            }}
+          />
+
+          <Text style={styles.text}>Title</Text>
+          <TextInput
+            placeholder="Enter Title"
+            style={styles.textInputStyle}
+            onChangeText={(value: string) => {
+              handleOnChangeText(value, 'title');
+            }}
+          />
+
+          <Text style={styles.text}>Content</Text>
+          <TextInput
+            placeholder="Write Post"
+            style={styles.textAreaStyle}
+            onChangeText={(value: string) => {
+              handleOnChangeText(value, 'content');
+            }}
+            multiline={true}
+            numberOfLines={10}
+          />
+
+          {/* <Text style={styles.text}>Email</Text>
+          <TextInput
+            placeholder="Enter email"
+            style={styles.textInputStyle}
+            onChangeText={(value: string) => {
+              handleOnChangeText(value, 'email');
+            }}
+          /> */}
+        </ScrollView>
+      )}
+      {id ? (
+        <Button
+          title="Edit Post"
+          onPress={editAction}
+          style={styles.buttonStyle}
+          btnStyle={styles.btnStyle}
         />
-      </ScrollView>
-      <Button
-        title="Create Post"
-        onPress={addCustomer}
-        style={styles.buttonStyle}
-        btnStyle={styles.btnStyle}
-      />
+      ) : (
+        <Button
+          title="Create Post"
+          onPress={addCustomer}
+          style={styles.buttonStyle}
+          btnStyle={styles.btnStyle}
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -208,6 +302,17 @@ const styles = StyleSheet.create({
     fontSize: hp(1.9),
     marginBottom: hp(2),
     height: hp(5),
+  },
+
+  textAreaStyle: {
+    borderWidth: wp(0.1),
+    borderRadius: wp(2),
+    marginTop: hp(1),
+    paddingHorizontal: wp(5),
+    fontSize: hp(1.9),
+    marginBottom: hp(2),
+    height: hp(20),
+    textAlign: 'center',
   },
 
   textDateStyles: {
