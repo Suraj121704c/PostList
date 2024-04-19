@@ -61,19 +61,23 @@ const Create = () => {
     isLiked: true,
   });
 
-  const [editPost, setEditPost] = useState({
-    id: id_data[0]?.id,
-    profile_picture: id_data[0]?.profile_picture,
-    name: id_data[0]?.name,
-    title: id_data[0]?.content,
-    timeAgo: id_data[0]?.timeAgo,
-    content: id_data[0]?.content,
-    hasImage: id_data[0]?.hasImage,
-    shares: id_data[0]?.hasImage,
-    comments: id_data[0]?.comments,
-    likes: id_data[0]?.likes,
-    isLiked: id_data[0]?.isLiked,
-  });
+  const [editPost, setEditPost] = useState(
+    id_data[0]?.profile_picture
+      ? {
+          id: id,
+          profile_picture: id_data[0]?.profile_picture,
+          name: id_data[0]?.name,
+          title: id_data[0]?.content,
+          timeAgo: id_data[0]?.timeAgo,
+          content: id_data[0]?.content,
+          hasImage: id_data[0]?.hasImage,
+          shares: id_data[0]?.hasImage,
+          comments: id_data[0]?.comments,
+          likes: id_data[0]?.likes,
+          isLiked: id_data[0]?.isLiked,
+        }
+      : {},
+  );
 
   const addCustomer = () => {
     dispatch(CreatePostAction(userData));
@@ -102,7 +106,7 @@ const Create = () => {
 
   const handleEditChangeText = (value: any, name: any) => {
     setEditPost({
-      ...userData,
+      ...editPost,
       [name]: value,
     });
   };
@@ -121,7 +125,7 @@ const Create = () => {
           style={styles.scrollViewContainer}>
           <View style={styles.userView}>
             <Image
-              source={{uri: id_data[0]?.profile_picture}}
+              source={{uri: editPost.profile_picture}}
               style={styles.userImage}
             />
           </View>
@@ -130,7 +134,7 @@ const Create = () => {
           <TextInput
             placeholder="Enter your Name"
             style={styles.textInputStyle}
-            value={id_data[0]?.name}
+            value={editPost?.name}
             onChangeText={(value: string) => {
               handleEditChangeText(value, 'name');
             }}
@@ -139,7 +143,7 @@ const Create = () => {
           <Text style={styles.text}>Title</Text>
           <TextInput
             placeholder="Enter Title"
-            value={editPost?.title}
+            defaultValue={editPost.title}
             style={styles.textInputStyle}
             onChangeText={(value: string) => {
               handleEditChangeText(value, 'title');
@@ -194,15 +198,6 @@ const Create = () => {
             multiline={true}
             numberOfLines={10}
           />
-
-          {/* <Text style={styles.text}>Email</Text>
-          <TextInput
-            placeholder="Enter email"
-            style={styles.textInputStyle}
-            onChangeText={(value: string) => {
-              handleOnChangeText(value, 'email');
-            }}
-          /> */}
         </ScrollView>
       )}
       {id ? (
