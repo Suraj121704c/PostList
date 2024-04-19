@@ -11,17 +11,26 @@ import {Loader} from '../Components/Loader';
 export default function Home() {
   const dispatch = useDispatch<any>();
   const {data, loading, error} = useSelector((state: any) => state.postReducer);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   useEffect(() => {
     dispatch(postActions());
   }, []);
 
-  console.log(loading)
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    dispatch(postActions());
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
   return (
     <SafeAreaView>
       {loading && <Loader />}
       <FlatList
+        onRefresh={onRefresh}
+        refreshing={refreshing}
         data={data}
         showsVerticalScrollIndicator={false}
         renderItem={({item}) => <ShowPosts item={item} />}

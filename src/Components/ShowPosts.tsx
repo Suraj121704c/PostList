@@ -12,12 +12,18 @@ import Images from '../Utils/Images';
 import Styles from '../Utils/Styles';
 import {useNavigation} from '@react-navigation/native';
 import Screens from '../Utils/Screens';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Loader} from './Loader';
+import {DeletePostAction} from '../Redux/Actions/postAction';
 
 export default function ShowPosts({item}: any) {
   const navigation = useNavigation<any>();
   const id = item?.id;
+  const dispatch = useDispatch<any>();
+
+  const deleteAction = (id: any) => {
+    dispatch(DeletePostAction(id));
+  };
 
   return (
     <View
@@ -98,7 +104,7 @@ export default function ShowPosts({item}: any) {
         <View style={{marginTop: 10}} />
       )}
 
-      {item.hasImage ? (
+      {item.hasImage && (
         <TouchableOpacity
           onPress={() => navigation.navigate(Screens.COMMENT, {id: id})}>
           <Image
@@ -106,7 +112,7 @@ export default function ShowPosts({item}: any) {
             style={{height: hp(25), width: deviceWidth}}
           />
         </TouchableOpacity>
-      ) : null}
+      )}
 
       <View
         style={[
@@ -165,12 +171,24 @@ export default function ShowPosts({item}: any) {
           <Text style={{color: Colors.BLUE}}>comment</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={{alignItems: 'center'}} onPress={() => {}}>
+        <TouchableOpacity
+          style={{alignItems: 'center'}}
+          onPress={() => navigation.navigate(Screens.CREATE)}>
           <Image
             source={Images.IMG.EDIT}
             style={{height: hp(3.3), width: wp(7)}}
           />
           <Text style={{color: Colors.BLUE}}>Edit</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{alignItems: 'center'}}
+          onPress={() => deleteAction(id)}>
+          <Image
+            source={Images.IMG.DELETE}
+            style={{height: hp(3.3), width: wp(7)}}
+          />
+          <Text style={{color: Colors.BLUE}}>Delete</Text>
         </TouchableOpacity>
       </View>
     </View>

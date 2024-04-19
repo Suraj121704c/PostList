@@ -2,7 +2,9 @@ import {
   Data_Failed,
   Data_Request,
   Data_Success,
+  Post_Created,
   Post_Data_Success,
+  Post_Error,
 } from '../types';
 
 const Initial_State = {
@@ -10,6 +12,8 @@ const Initial_State = {
   loading: false,
   error: false,
   id_data: '',
+  postCreated: false,
+  postCreationError: '',
 };
 
 export const postReducer = (state = Initial_State, action: any) => {
@@ -40,6 +44,20 @@ export const postReducer = (state = Initial_State, action: any) => {
         ...state,
         loading: false,
         id_data: action.payload,
+      };
+    }
+    case Post_Created: {
+      return {
+        ...state,
+        loading: false,
+        postCreated: true,
+      };
+    }
+    case Post_Error: {
+      return {
+        ...state,
+        loading: false,
+        postCreationError: action.payload,
       };
     }
     default: {

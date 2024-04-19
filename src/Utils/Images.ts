@@ -64,6 +64,7 @@ const Images = {
     ADMIN: require('../../assets/Images/administrator.png'),
     MORE: require('../../assets/Images/more.png'),
     EDIT: require('../../assets/Images/writing.png'),
+    DELETE: require('../../assets/Images/delete.png'),
   },
 };
 

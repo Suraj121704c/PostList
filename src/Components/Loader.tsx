@@ -18,6 +18,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'lightgrey',
-    marginTop : hp(40)
+    marginTop : hp(40),
   },
 });

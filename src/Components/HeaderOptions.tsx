@@ -73,9 +73,7 @@ const HeaderOptions = ({
       />
     )}
 
-    <TouchableOpacity
-      style={{marginRight: 19}}
-      onPress={() => navigation.navigate(Screens.NOTIFICATION)}>
+    <TouchableOpacity style={{marginRight: 19}} onPress={() => navigation.navigate(Screens.CREATE)}>
       {isPostScreen ? (
         <Text style={{color: Colors.GRAY, fontSize: 16, fontWeight: 'bold'}}>
           Post

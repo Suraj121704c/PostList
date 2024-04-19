@@ -1,15 +1,17 @@
 import axios from 'axios';
-import {BaseUrl} from '../Api';
+import {BaseUrl, BaseUrl2} from '../Api';
 import {
   Data_Failed,
   Data_Request,
   Data_Success,
   Post_Data_Success,
+  Post_Error,
 } from '../types';
+import {Alert} from 'react-native';
 
 export const postActions = () => {
   return (dispatch: any) => {
-    const url = BaseUrl;
+    const url = BaseUrl2;
     dispatch({
       type: Data_Request,
     });
@@ -34,7 +36,7 @@ export const postActionById = (id: any) => {
     dispatch({
       type: Data_Request,
     });
-    const url = BaseUrl + `?id=${id}`;
+    const url = BaseUrl2 + `?id=${id}`;
     axios
       .get(url)
       .then((res: any) => {
@@ -51,7 +53,7 @@ export const postActionById = (id: any) => {
 
 export const searchAction = (name: any) => {
   return (dispatch: any) => {
-    const url = `https://plum-motionless-shrimp.cyclic.app/post?name=${name}`;
+    const url = `https://post-backend-j1br.onrender.com/post?name=${name}`;
     axios
       .get(url)
       .then((res: any) => {
@@ -67,3 +69,60 @@ export const searchAction = (name: any) => {
       });
   };
 };
+
+export const CreatePostAction = (data: any) => {
+  return (dispatch: any) => {
+    const url = BaseUrl2;
+    axios
+      .post(url, data)
+      .then((res: any) => {
+        console.log(data);
+        Alert.alert('Data Added Successfully', 'success');
+        // dispatch({
+        //   type: Data_Success,
+        //   payload: res?.data,
+        // });
+      })
+      .catch((err: any) => {
+        dispatch({
+          type: Post_Error,
+          postCreationError: err,
+        });
+        Alert.alert(err, 'Error');
+      });
+  };
+};
+
+export const DeletePostAction = (id: any) => {
+  return (dispatch: any) => {
+    const url = `${BaseUrl2}/${id}`;
+    axios
+      .delete(url)
+      .then((res: any) => {
+        console.log(res);
+        Alert.alert('Data Deleted Successfully', 'success');
+        postActions();
+      })
+      .catch((err: any) => {
+        Alert.alert(err, 'Error');
+      });
+  };
+};
+
+
+export const putPostAction = (id: any) => {
+  return (dispatch: any) => {
+    const url = `${BaseUrl2}/${id}`;
+    axios
+      .delete(url)
+      .then((res: any) => {
+        console.log(res);
+        Alert.alert('Data Edited Successfully', 'success');
+        postActions();
+      })
+      .catch((err: any) => {
+        Alert.alert(err, 'Error');
+      });
+  };
+};
+
