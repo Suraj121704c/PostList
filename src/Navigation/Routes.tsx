@@ -23,13 +23,16 @@ import Comments from '../Screens/comments';
 import Images from '../Utils/Images';
 import {useDispatch} from 'react-redux';
 import {searchAction} from '../Redux/Actions/postAction';
+import Create from '../Screens/Create';
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
 const NotificationStack = createNativeStackNavigator();
 
 const HomeScreen = () => (
-  <HomeStack.Navigator screenOptions={{headerShown: false}}>
+  <HomeStack.Navigator
+    screenOptions={{headerShown: false}}
+    initialRouteName={Screens.HOME}>
     <HomeStack.Screen name={Screens.HOME} component={Home} />
     <HomeStack.Screen name={Screens.PROFILE} component={Profile} />
     <HomeStack.Screen name={Screens.COMMENT} component={Comments} />
@@ -37,16 +40,9 @@ const HomeScreen = () => (
   </HomeStack.Navigator>
 );
 
-export const CustomDrawerButton = ({navigation}: any) => (
-  <Button onPress={() => navigation.toggleDrawer()} title="Open Drawer" />
-);
-
 const NotificationScreen = () => (
   <NotificationStack.Navigator screenOptions={{headerShown: false}}>
-    <NotificationStack.Screen
-      name={Screens.NOTIFICATION}
-      component={Notification}
-    />
+    <NotificationStack.Screen name={Screens.CREATE} component={Create} />
   </NotificationStack.Navigator>
 );
 
@@ -84,7 +80,7 @@ export default function Routes() {
     tabBarStyle: {display: showTabBar(route)},
     tabBarBadge: isNotificationScreen ? 5 : null,
     tabBarIcon: ({focused}: any) => (
-      <Image source={icon} style={{height: hp(3), width: wp(6.6)}} />
+      <Image source={icon} style={{height: hp(3.1), width: wp(6.6)}} />
     ),
     header: () => (
       <HeaderOptions
@@ -116,18 +112,10 @@ export default function Routes() {
           }
         />
         <Tab.Screen
-          name={Screens.NOTIFICATION_STACK}
+          name={Screens.NOTIFICATION}
           component={NotificationScreen}
           options={({navigation, route}): any =>
-            header(
-              navigation,
-              route,
-              Images.ROUTES.ROUTE2,
-              'Notifications',
-              '',
-              false,
-              true,
-            )
+            header(navigation, route, Images.IMG.EDIT, 'Create')
           }
         />
       </Tab.Navigator>

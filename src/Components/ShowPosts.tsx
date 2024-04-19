@@ -167,10 +167,10 @@ export default function ShowPosts({item}: any) {
 
         <TouchableOpacity style={{alignItems: 'center'}} onPress={() => {}}>
           <Image
-            source={Images.IMG.SEND}
+            source={Images.IMG.EDIT}
             style={{height: hp(3.3), width: wp(7)}}
           />
-          <Text style={{color: Colors.BLUE}}>share</Text>
+          <Text style={{color: Colors.BLUE}}>Edit</Text>
         </TouchableOpacity>
       </View>
     </View>

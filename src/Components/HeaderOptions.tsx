@@ -31,10 +31,10 @@ const HeaderOptions = ({
     ]}>
     <View style={{paddingLeft: wp(2)}}>
       {isPostScreen ? (
-        <TouchableOpacity onPress={() => navigation.navigate(Screens.HOME)}>
-        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(Screens.HOME)}></TouchableOpacity>
       ) : (
-        <TouchableOpacity onPress={() => navigation.navigate(Screens.PROFILE)}>
+        <TouchableOpacity>
           <Image
             source={Images.USERS.USER1}
             style={{borderRadius: wp(4), height: hp(4.8), width: wp(10.2)}}
@@ -73,14 +73,16 @@ const HeaderOptions = ({
       />
     )}
 
-    <TouchableOpacity style={{marginRight: 19}}>
+    <TouchableOpacity
+      style={{marginRight: 19}}
+      onPress={() => navigation.navigate(Screens.NOTIFICATION)}>
       {isPostScreen ? (
         <Text style={{color: Colors.GRAY, fontSize: 16, fontWeight: 'bold'}}>
           Post
         </Text>
       ) : (
         <Image
-          source={Images.IMG.CHAT}
+          source={Images.IMG.EDIT}
           style={{height: hp(3), width: wp(6.5)}}
         />
       )}

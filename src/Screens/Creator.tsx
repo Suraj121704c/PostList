@@ -1,9 +1,12 @@
 import {View, Text, ScrollView, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect} from 'react';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 // user defined imports
 import * as ProfileData from '../Data/Profile';
-import CustomIcon from '../Components/CustomIcon';
 import SectionHeading from '../Components/SectionHeading';
 import ShowExperience from '../Components/Profile/ShowExperience';
 import ShowAllFooter from '../Components/ShowAllFooter';
@@ -47,7 +50,7 @@ const Creator = () => {
             left: 15,
           }}
         />
-        <View style={{marginTop: -45, paddingHorizontal: 10}}>
+        <View style={{marginTop: -45, paddingHorizontal: 10 , marginBottom : hp(2)}}>
           <Text style={{fontSize: 28, color: Colors.BLACK, fontWeight: 'bold'}}>
             {id_data[0]?.name}
           </Text>
@@ -69,7 +72,7 @@ const Creator = () => {
             </Text>
           </View>
         </View>
-
+{/* 
         <View
           style={[
             Styles.flexCenter,
@@ -101,7 +104,7 @@ const Creator = () => {
             }}>
             <Text style={{color: Colors.GRAY, fontSize: 19}}>Add Section</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
 
       <View
@@ -119,16 +122,9 @@ const Creator = () => {
 
         <Text
           style={{color: Colors.BLACK, fontSize: 15, textAlign: 'justify'}}
-          numberOfLines={4}
           ellipsizeMode="tail">
           {DATA.ABOUT}
         </Text>
-      </View>
-
-      <View style={Styles.container}>
-        <SectionHeading title="Experience" />
-        <ShowExperience DATA={DATA} />
-        <ShowAllFooter />
       </View>
 
       <View style={Styles.container}>

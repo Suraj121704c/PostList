@@ -34,6 +34,11 @@ const Comments = () => {
       commentValue:
         'In commodo eu nulla duis adipisicing proident Lorem qui incididunt',
     },
+    {
+      id: 2,
+      commentValue:
+        'In commodo eu nulla duis adipisicing proident Lorem qui incididunt',
+    },
   ]);
   const [commentValue, setCommentValue] = useState('');
   const InputRef = useRef<any>();

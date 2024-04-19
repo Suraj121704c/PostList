@@ -63,6 +63,7 @@ const Images = {
     LIKE: require('../../assets/Images/like.png'),
     ADMIN: require('../../assets/Images/administrator.png'),
     MORE: require('../../assets/Images/more.png'),
+    EDIT: require('../../assets/Images/writing.png'),
   },
 };
 

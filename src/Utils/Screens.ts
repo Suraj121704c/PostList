@@ -12,6 +12,7 @@ const Screens = {
   PROFILE: 'PROFILE',
   COMMENT: 'COMMENT',
   CREATOR: 'CRESTOR',
+  CREATE: 'CREATE',
 };
 
 export default Screens;
