@@ -58,12 +58,8 @@ export default function Routes() {
   };
 
   const handleSearchSubmit = () => {
-    handleSearchTextChange(search);
-  };
-
-  useEffect(() => {
     dispatch(searchAction(search));
-  }, [handleSearchSubmit]);
+  };
 
   const header = (
     navigation: any,

@@ -55,34 +55,16 @@ export default function ShowPosts({item}: any) {
                 color: Colors.BLACK,
                 fontWeight: 'bold',
               }}>
-              {item?.name}
+              {item?.username}
             </Text>
-            {item.connection ? (
-              <Text style={{fontWeight: 'bold'}}>{item.connection}</Text>
-            ) : null}
           </TouchableOpacity>
-          <Text style={{width: wp(100)}} numberOfLines={1} ellipsizeMode="tail">
+          <Text
+            style={{width: wp(100), color: '#000'}}
+            numberOfLines={1}
+            ellipsizeMode="tail">
             {item.title}
           </Text>
-          <Text style={{fontSize: hp(2)}}>{item.timeAgo} hr</Text>
         </View>
-        {item.connection ? (
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{width: 80, alignItems: 'flex-end'}}></TouchableOpacity>
-        ) : (
-          <TouchableOpacity onPress={() => {}} style={Styles.flexCenter}>
-            <Text
-              style={{
-                fontSize: 19,
-                fontWeight: 'bold',
-                color: Colors.BLUE,
-                marginLeft: 5,
-              }}>
-              Follow
-            </Text>
-          </TouchableOpacity>
-        )}
       </View>
 
       {item.content ? (
@@ -92,12 +74,11 @@ export default function ShowPosts({item}: any) {
             style={{
               paddingHorizontal: 16,
               color: Colors.BLACK,
-              marginVertical: 10,
+              marginVertical: hp(1),
               textAlign: 'justify',
             }}
-            numberOfLines={3}
             ellipsizeMode="tail">
-            {item.content}
+            {item?.content}
           </Text>
         </TouchableOpacity>
       ) : (
@@ -151,13 +132,13 @@ export default function ShowPosts({item}: any) {
             paddingHorizontal: 40,
           },
         ]}>
-        {/* <TouchableOpacity onPress={() => {}} style={{alignItems: 'center'}}>
+        <TouchableOpacity onPress={() => {}} style={{alignItems: 'center'}}>
           <Image
             source={Images.IMG.LIKE}
-            style={{height: hp(3.3), width: wp(7)}}
+            style={{height: hp(2.3), width: wp(5)}}
           />
           <Text style={{color: Colors.BLUE}}>Like</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={{alignItems: 'center'}}

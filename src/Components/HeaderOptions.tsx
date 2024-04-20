@@ -56,7 +56,7 @@ const HeaderOptions = ({
       </Text>
     ) : (
       <TextInput
-        placeholder="Search"
+        placeholder="Search by title"
         placeholderTextColor={Colors.BLACK}
         style={{
           marginHorizontal: wp(5),

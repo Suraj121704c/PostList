@@ -32,6 +32,8 @@ const Create = () => {
     (state: any) => state.postReducer,
   );
 
+  console.log(id_data);
+
   useEffect(() => {
     if (id) {
       dispatch(postActionById(id));
@@ -61,23 +63,37 @@ const Create = () => {
     isLiked: true,
   });
 
-  const [editPost, setEditPost] = useState(
-    id_data[0]?.profile_picture
-      ? {
-          id: id,
-          profile_picture: id_data[0]?.profile_picture,
-          name: id_data[0]?.name,
-          title: id_data[0]?.content,
-          timeAgo: id_data[0]?.timeAgo,
-          content: id_data[0]?.content,
-          hasImage: id_data[0]?.hasImage,
-          shares: id_data[0]?.hasImage,
-          comments: id_data[0]?.comments,
-          likes: id_data[0]?.likes,
-          isLiked: id_data[0]?.isLiked,
-        }
-      : {},
-  );
+  const [editPost, setEditPost] = useState({
+    id: '',
+    profile_picture: '',
+    name: '',
+    title: '',
+    timeAgo: 0,
+    content: '',
+    hasImage: true,
+    shares: 0,
+    comments: 0,
+    likes: 0,
+    isLiked: false,
+  });
+
+  useEffect(() => {
+    setEditPost({
+      id: id,
+      profile_picture: id_data[0]?.profile_picture,
+      name: id_data[0]?.name,
+      title: id_data[0]?.content,
+      timeAgo: id_data[0]?.timeAgo,
+      content: id_data[0]?.content,
+      hasImage: id_data[0]?.hasImage,
+      shares: id_data[0]?.hasImage,
+      comments: id_data[0]?.comments,
+      likes: id_data[0]?.likes,
+      isLiked: id_data[0]?.isLiked,
+    });
+  }, [id_data]);
+
+  console.log(editPost, '-------------');
 
   const addCustomer = () => {
     dispatch(CreatePostAction(userData));
@@ -119,13 +135,13 @@ const Create = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {id ? (
+      {id && editPost?.profile_picture ? (
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={styles.scrollViewContainer}>
           <View style={styles.userView}>
             <Image
-              source={{uri: editPost.profile_picture}}
+              source={{uri: editPost && editPost?.profile_picture}}
               style={styles.userImage}
             />
           </View>
@@ -197,6 +213,15 @@ const Create = () => {
             }}
             multiline={true}
             numberOfLines={10}
+          />
+
+          <Text style={styles.text}>PostImage</Text>
+          <TextInput
+            placeholder="Enter Title"
+            style={styles.textInputStyle}
+            onChangeText={(value: string) => {
+              handleOnChangeText(value, 'postImage');
+            }}
           />
         </ScrollView>
       )}

@@ -7,7 +7,7 @@ import {
 
 // user defined imports
 import * as ProfileData from '../Data/Profile';
-import SectionHeading from '../Components/SectionHeading'
+import SectionHeading from '../Components/SectionHeading';
 import ShowEducation from '../Components/Profile/ShowEducation';
 import Colors from '../Utils/Colors';
 import Styles from '../Utils/Styles';
@@ -45,61 +45,23 @@ const Creator = () => {
             left: 15,
           }}
         />
-        <View style={{marginTop: -45, paddingHorizontal: 10 , marginBottom : hp(2)}}>
+        <View
+          style={{marginTop: -45, paddingHorizontal: 10, marginBottom: hp(2)}}>
           <Text style={{fontSize: 28, color: Colors.BLACK, fontWeight: 'bold'}}>
-            {id_data[0]?.name}
+            {id_data[0]?.username}
           </Text>
           <Text style={{color: Colors.BLACK, fontSize: 16}}>
-            {id_data[0]?.title}
+            {id_data[0]?.name}
           </Text>
-          <Text style={{marginTop: 4, marginBottom: 10}}>
-            Talks about - {DATA.INFO.talksAbout.map(item => `${item} `)}
+          <Text
+            style={{
+              marginTop: hp(1),
+              marginBottom: hp(1),
+              color: Colors.BLACK,
+            }}>
+            Email - {id_data[0]?.email}
           </Text>
-          <View style={Styles.flexCenter}>
-            <Text
-              style={{color: Colors.BLUE, fontSize: 15, fontWeight: 'bold'}}>
-              {DATA.INFO.followers} followers
-            </Text>
-            <Text
-              style={{color: Colors.BLUE, fontSize: 15, fontWeight: 'bold'}}>
-              {DATA.INFO.connections > 500 ? '500+' : DATA.INFO.connections}{' '}
-              connections
-            </Text>
-          </View>
         </View>
-{/* 
-        <View
-          style={[
-            Styles.flexCenter,
-            {
-              marginVertical: 16,
-              justifyContent: 'space-evenly',
-            },
-          ]}>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              backgroundColor: Colors.BLUE,
-              borderRadius: 50,
-              width: 140,
-              paddingVertical: 5,
-              alignItems: 'center',
-            }}>
-            <Text style={{color: Colors.WHITE, fontSize: 19}}>Open to</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              borderWidth: 1,
-              borderColor: Colors.GRAY,
-              borderRadius: 50,
-              width: 140,
-              paddingVertical: 5,
-              alignItems: 'center',
-            }}>
-            <Text style={{color: Colors.GRAY, fontSize: 19}}>Add Section</Text>
-          </TouchableOpacity>
-        </View> */}
       </View>
 
       <View
@@ -112,19 +74,20 @@ const Creator = () => {
               marginBottom: 14,
             },
           ]}>
-          <Heading title="About" />
+          <Heading title="Company Details" />
         </View>
 
         <Text
           style={{color: Colors.BLACK, fontSize: 15, textAlign: 'justify'}}
           ellipsizeMode="tail">
-          {DATA.ABOUT}
+          {id_data[0]?.company_details}
         </Text>
-      </View>
 
-      <View style={Styles.container}>
-        <SectionHeading title="Education" />
-        <ShowEducation DATA={DATA} />
+        <Text
+          style={{color: Colors.BLACK, fontSize: 15, textAlign: 'justify'}}
+          ellipsizeMode="tail">
+          Website Link : {id_data[0]?.website}
+        </Text>
       </View>
     </ScrollView>
   );

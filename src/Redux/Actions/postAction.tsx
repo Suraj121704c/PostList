@@ -53,7 +53,7 @@ export const postActionById = (id: any) => {
 
 export const searchAction = (name: any) => {
   return (dispatch: any) => {
-    const url = `https://post-backend-j1br.onrender.com/post?name=${name}`;
+    const url = `https://post-backend-2.onrender.com/post?title=${name}`;
     axios
       .get(url)
       .then((res: any) => {

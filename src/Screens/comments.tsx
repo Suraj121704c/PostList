@@ -108,36 +108,16 @@ const Comments = () => {
               onPress={() => navigation.navigate(Screens.CREATOR, {id: id})}>
               <Text
                 style={{fontSize: 16, color: Colors.BLACK, fontWeight: 'bold'}}>
-                {id_data[0]?.name}
+                {id_data[0]?.username}
               </Text>
-              {item.connection ? (
-                <Text style={{fontWeight: 'bold'}}>
-                  {id_data[0]?.connection}
-                </Text>
-              ) : null}
             </TouchableOpacity>
-            <Text style={{width: 180}} numberOfLines={1} ellipsizeMode="tail">
+            <Text
+              style={{width: 180, color: '#000'}}
+              numberOfLines={1}
+              ellipsizeMode="tail">
               {id_data[0]?.title}
             </Text>
-            <Text style={{fontSize: 11}}>{id_data[0]?.timeAgo} hr</Text>
           </View>
-          {item.connection ? (
-            <TouchableOpacity
-              onPress={() => {}}
-              style={{width: 80, alignItems: 'flex-end'}}></TouchableOpacity>
-          ) : (
-            <TouchableOpacity onPress={() => {}} style={Styles.flexCenter}>
-              <Text
-                style={{
-                  fontSize: 19,
-                  fontWeight: 'bold',
-                  color: Colors.BLUE,
-                  marginLeft: 5,
-                }}>
-                Follow
-              </Text>
-            </TouchableOpacity>
-          )}
         </View>
 
         {id_data[0]?.content ? (
@@ -148,7 +128,6 @@ const Comments = () => {
               marginVertical: 10,
               textAlign: 'justify',
             }}
-            numberOfLines={3}
             ellipsizeMode="tail">
             {id_data[0]?.content}
           </Text>
@@ -164,36 +143,13 @@ const Comments = () => {
         ) : null}
 
         <View
-          style={[
-            Styles.flexCenter,
-            {
-              justifyContent: 'space-between',
-              paddingHorizontal: 10,
-              paddingTop: 5,
-            },
-          ]}>
-          <View style={Styles.flexCenter}>
-            <Image
-              style={{height: 25, width: 25, borderRadius: 100}}
-              source={Images.LIKE}
-            />
-            <Text>{id_data[0]?.likes} likes</Text>
-          </View>
-          <View style={Styles.flexCenter}>
-            {item.comments > 0 ? (
-              <Text>{id_data[0]?.comments} comments</Text>
-            ) : null}
-          </View>
-        </View>
-
-        <View
           style={{
             marginTop: hp(3),
             flex: 1,
             alignItems: 'center',
           }}>
-          <Text style={{color: '#000', fontSize: hp(2.3)}}>
-            Comment Your Opinion
+          <Text style={{color: '#000', fontSize: hp(2.3), fontWeight: 'bold'}}>
+            Comment Your Opinions
           </Text>
           <View style={styles.comment_container}>
             <TextInput
@@ -226,6 +182,14 @@ const Comments = () => {
                   xyz@gmail.com
                 </Text>
               </View>
+              <Text
+                style={{
+                  fontSize: hp(2),
+                  marginTop: hp(1),
+                  color: '#000',
+                }}>
+                Subject : {id_data[0]?.title}
+              </Text>
               <Text style={{color: '#000', marginTop: hp(1)}}>
                 {c.commentValue}
               </Text>
@@ -273,7 +237,7 @@ const styles = StyleSheet.create({
     borderRadius: wp(2),
   },
   showComment_container: {
-    width: wp(80),
+    width: wp(85),
     minHeight: hp(6),
     backgroundColor: '#f2f2f2',
     marginTop: hp(1),
