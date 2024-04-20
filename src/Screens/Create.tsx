@@ -52,15 +52,20 @@ const Create = () => {
     id: randomId,
     profile_picture:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6JPOHWcXuh4vYdBUF-QxVlo0SIKAZ7iARahQliwZK0sfF6jaQsTsJF3s1_oY8xuLPgT8&usqp=CAU',
-    name: '',
+    name: 'Suraj Singh',
     title: '',
-    timeAgo: 1,
+    username: 'surajji794c',
     content: '',
-    hasImage: false,
+    hasImage: true,
     shares: 5,
     comments: 2,
     likes: 17,
     isLiked: true,
+    email: 'suraj@gmail.com',
+    website: 'https://www.vaave.com/',
+    company_details:
+      "Our dedication to safeguarding the confidentiality of our clients' information through robust security measures has earned us the trust of over 1000 customers worldwide.",
+    postImage: '',
   });
 
   const [editPost, setEditPost] = useState({
@@ -68,28 +73,36 @@ const Create = () => {
     profile_picture: '',
     name: '',
     title: '',
-    timeAgo: 0,
+    username: '',
     content: '',
     hasImage: true,
     shares: 0,
     comments: 0,
     likes: 0,
     isLiked: false,
+    email: '',
+    website: '',
+    company_details: '',
+    postImage: '',
   });
 
   useEffect(() => {
     setEditPost({
-      id: id,
+      id: id_data[0]?.id,
       profile_picture: id_data[0]?.profile_picture,
       name: id_data[0]?.name,
-      title: id_data[0]?.content,
-      timeAgo: id_data[0]?.timeAgo,
+      title: id_data[0]?.title,
+      username: id_data[0]?.username,
       content: id_data[0]?.content,
       hasImage: id_data[0]?.hasImage,
-      shares: id_data[0]?.hasImage,
+      shares: id_data[0]?.shares,
       comments: id_data[0]?.comments,
       likes: id_data[0]?.likes,
       isLiked: id_data[0]?.isLiked,
+      email: id_data[0]?.email,
+      website: id_data[0]?.website,
+      company_details: id_data[0]?.company_details,
+      postImage: id_data[0]?.postImage,
     });
   }, [id_data]);
 
@@ -97,20 +110,6 @@ const Create = () => {
 
   const addCustomer = () => {
     dispatch(CreatePostAction(userData));
-    setUserData({
-      id: randomId,
-      profile_picture:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6JPOHWcXuh4vYdBUF-QxVlo0SIKAZ7iARahQliwZK0sfF6jaQsTsJF3s1_oY8xuLPgT8&usqp=CAU',
-      name: '',
-      title: '',
-      timeAgo: 10,
-      content: '',
-      hasImage: false,
-      shares: 5,
-      comments: 2,
-      likes: 17,
-      isLiked: true,
-    });
   };
 
   const handleOnChangeText = (value: any, name: any) => {
@@ -146,16 +145,6 @@ const Create = () => {
             />
           </View>
 
-          <Text style={styles.text}>Name</Text>
-          <TextInput
-            placeholder="Enter your Name"
-            style={styles.textInputStyle}
-            value={editPost?.name}
-            onChangeText={(value: string) => {
-              handleEditChangeText(value, 'name');
-            }}
-          />
-
           <Text style={styles.text}>Title</Text>
           <TextInput
             placeholder="Enter Title"
@@ -177,6 +166,16 @@ const Create = () => {
             multiline={true}
             numberOfLines={10}
           />
+
+          <Text style={styles.text}>Post Image</Text>
+          <TextInput
+            placeholder="Enter image url"
+            style={styles.textInputStyle}
+            value={editPost?.postImage}
+            onChangeText={(value: string) => {
+              handleEditChangeText(value, 'postImage');
+            }}
+          />
         </ScrollView>
       ) : (
         <ScrollView
@@ -185,15 +184,6 @@ const Create = () => {
           <View style={styles.userView}>
             <Image source={Images.USERS.USER1} style={styles.userImage} />
           </View>
-
-          <Text style={styles.text}>Name</Text>
-          <TextInput
-            placeholder="Enter your Name"
-            style={styles.textInputStyle}
-            onChangeText={(value: string) => {
-              handleOnChangeText(value, 'name');
-            }}
-          />
 
           <Text style={styles.text}>Title</Text>
           <TextInput
@@ -217,7 +207,7 @@ const Create = () => {
 
           <Text style={styles.text}>PostImage</Text>
           <TextInput
-            placeholder="Enter Title"
+            placeholder="Enter Image Url"
             style={styles.textInputStyle}
             onChangeText={(value: string) => {
               handleOnChangeText(value, 'postImage');
