@@ -7,13 +7,8 @@ import {
 
 // user defined imports
 import * as ProfileData from '../Data/Profile';
-import SectionHeading from '../Components/SectionHeading';
-import ShowExperience from '../Components/Profile/ShowExperience';
-import ShowAllFooter from '../Components/ShowAllFooter';
+import SectionHeading from '../Components/SectionHeading'
 import ShowEducation from '../Components/Profile/ShowEducation';
-import ShowLicenses from '../Components/Profile/ShowLicenses';
-import ShowCourses from '../Components/Profile/ShowCourses';
-import ShowProjects from '../Components/Profile/ShowProjects';
 import Colors from '../Utils/Colors';
 import Styles from '../Utils/Styles';
 import Heading from '../Components/Heading';

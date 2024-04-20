@@ -12,9 +12,7 @@ import {
 
 // user defined imports
 import Screens from '../Utils/Screens';
-import Profile from '../Screens/Profile';
 import Home from '../Screens/Home';
-import Notification from '../Screens/Notification';
 import Colors from '../Utils/Colors';
 import {Button, Image, StatusBar} from 'react-native';
 import HeaderOptions from '../Components/HeaderOptions';
@@ -34,7 +32,6 @@ const HomeScreen = () => (
     screenOptions={{headerShown: false}}
     initialRouteName={Screens.HOME}>
     <HomeStack.Screen name={Screens.HOME} component={Home} />
-    <HomeStack.Screen name={Screens.PROFILE} component={Profile} />
     <HomeStack.Screen name={Screens.COMMENT} component={Comments} />
     <HomeStack.Screen name={Screens.CREATOR} component={Creator} />
     <NotificationStack.Screen name={Screens.CREATE} component={Create} />

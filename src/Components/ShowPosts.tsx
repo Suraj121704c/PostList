@@ -114,7 +114,7 @@ export default function ShowPosts({item}: any) {
         </TouchableOpacity>
       )}
 
-      <View
+      {/* <View
         style={[
           Styles.flexCenter,
           {
@@ -133,7 +133,7 @@ export default function ShowPosts({item}: any) {
         <View style={Styles.flexCenter}>
           {item.comments > 0 ? <Text>{item.comments} comments</Text> : null}
         </View>
-      </View>
+      </View> */}
 
       <View
         style={{
@@ -151,13 +151,13 @@ export default function ShowPosts({item}: any) {
             paddingHorizontal: 40,
           },
         ]}>
-        <TouchableOpacity onPress={() => {}} style={{alignItems: 'center'}}>
+        {/* <TouchableOpacity onPress={() => {}} style={{alignItems: 'center'}}>
           <Image
             source={Images.IMG.LIKE}
             style={{height: hp(3.3), width: wp(7)}}
           />
           <Text style={{color: Colors.BLUE}}>Like</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TouchableOpacity
           style={{alignItems: 'center'}}
@@ -166,7 +166,7 @@ export default function ShowPosts({item}: any) {
           }}>
           <Image
             source={Images.IMG.CHAT}
-            style={{height: hp(3.3), width: wp(7)}}
+            style={{height: hp(2.3), width: wp(5)}}
           />
           <Text style={{color: Colors.BLUE}}>comment</Text>
         </TouchableOpacity>
@@ -176,7 +176,7 @@ export default function ShowPosts({item}: any) {
           onPress={() => navigation.navigate(Screens.CREATE, {id: id})}>
           <Image
             source={Images.IMG.EDIT}
-            style={{height: hp(3.3), width: wp(7)}}
+            style={{height: hp(2.3), width: wp(5)}}
           />
           <Text style={{color: Colors.BLUE}}>Edit</Text>
         </TouchableOpacity>
@@ -186,7 +186,7 @@ export default function ShowPosts({item}: any) {
           onPress={() => deleteAction(id)}>
           <Image
             source={Images.IMG.DELETE}
-            style={{height: hp(3.3), width: wp(7)}}
+            style={{height: hp(2.3), width: wp(5)}}
           />
           <Text style={{color: Colors.BLUE}}>Delete</Text>
         </TouchableOpacity>
